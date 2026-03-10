@@ -1,0 +1,55 @@
+{
+  "castle_hp": 100,
+  "slot": 1,
+  "max_spawn": 5,
+  "reward": 100,
+  "items": {
+    "castle_hp": 1,
+    "slot": 0,
+    "max_spawn": 1,
+    "reward": 1
+  },
+  "costs": {
+    "castle_hp": 5,
+    "slot": 50,
+    "max_spawn": 12,
+    "reward": 20
+  },
+  "allies":
+  {
+    "わんーこ":
+    {
+      "enhancement": {
+        "magnification": 1,
+        "first_wait": 500,
+        "respawn": 300,
+        "spawn_num": 5,
+        "ability": {}
+      },
+      "items": {
+        "magnification": 1,
+        "first_wait": 1,
+        "respawn": 1,
+        "spawn_num": 1,
+        "ability": {}
+      },
+      "auto_spawn": true,
+      "auto_respawn": true,
+      "cost": 4
+    }
+  },
+  "enemies":
+  {
+    "ネーコ": 0,
+    "タンクネーコ": 0,
+    "バトルネーコ": 0,
+    "キモネーコ": 0,
+    "ウシネーコ": 0,
+    "ネーコノトーリ": 0,
+    "ネーコフィッシュ": 0,
+    "ネーコトカゲ": 0,
+    "ネーコ巨神": 0,
+    "再生産": 0,
+    "城体力": 0
+  }
+}

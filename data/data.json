@@ -1,0 +1,471 @@
+{
+  "items":
+  [
+    {
+      "name": "50 G",
+      "effect": "money",
+      "value": 50,
+      "description": "50 Gを獲得する",
+      "percent": 0.8
+    },
+    {
+      "name": "100 G",
+      "effect": "money",
+      "value": 100,
+      "description": "100 Gを獲得する",
+      "percent": 0.5
+    },
+    {
+      "name": "200 G",
+      "effect": "money",
+      "value": 200,
+      "description": "200 Gを獲得する",
+      "percent": 0.2
+    },
+    {
+      "name": "選択肢増加",
+      "effect": "choice_increase",
+      "value": 1,
+      "description": "この画面で選択できる選択肢の数が1つ増える",
+      "percent": 1
+    },
+    {
+      "name": "{character} 取得",
+      "effect": "character_unlock",
+      "value": ["{character}"],
+      "description": "{character}を仲間にする",
+      "percent": 1
+    },
+    {
+      "name": "{character} 強化I",
+      "effect": "character_upgrade",
+      "value": ["{character}", 1.5],
+      "description": "{character}の体力と攻撃力が1.5倍になる",
+      "percent": 0.6
+    },
+    {
+      "name": "{character} 強化II",
+      "effect": "character_upgrade",
+      "value": ["{character}", 1.8],
+      "description": "{character}の体力と攻撃力が1.8倍になる",
+      "percent": 0.3
+    },
+    {
+      "name": "{character} 強化III",
+      "effect": "character_upgrade",
+      "value": ["{character}", 2],
+      "description": "{character}の体力と攻撃力が2倍になる",
+      "percent": 0.1
+    }
+  ],
+  "enemy_enhancements":
+  [
+    {
+      "name": "ネーコ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ネーコ", 1],
+      "description": "ネーコの体力と攻撃力が上昇"
+    },
+    {
+      "name": "タンクネーコ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["タンクネーコ", 1],
+      "description": "タンクネーコの体力と攻撃力が上昇"
+    },
+    {
+      "name": "バトルネーコ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["バトルネーコ", 1],
+      "description": "バトルネーコの体力と攻撃力が上昇"
+    },
+    {
+      "name": "キモネーコ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["キモネーコ", 1],
+      "description": "キモネーコの体力と攻撃力が上昇"
+    },
+    {
+      "name": "ウシネーコ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ウシネーコ", 1],
+      "description": "ウシネーコの体力と攻撃力が上昇"
+    },
+    {
+      "name": "ネーコノトーリ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ネーコノトーリ", 1],
+      "description": "ネーコノトーリの体力と攻撃力が上昇"
+    },
+    {
+      "name": "ネーコフィッシュ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ネーコフィッシュ", 1],
+      "description": "ネーコフィッシュの体力と攻撃力が上昇"
+    },
+    {
+      "name": "ネーコトカゲ　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ネーコトカゲ", 1],
+      "description": "ネーコトカゲの体力と攻撃力が上昇"
+    },
+    {
+      "name": "ネーコ巨神　レベルアップ",
+      "effect": "enemy_level_up",
+      "value": ["ネーコ巨神", 1],
+      "description": "ネーコ巨神の体力と攻撃力が上昇"
+    },
+    {
+      "name": "敵出現間隔短縮",
+      "effect": "enemy_spawn_rate_up",
+      "value": 0.95,
+      "description": "敵の出現ペースが速くなる"
+    },
+    {
+      "name": "敵城体力アップ",
+      "effect": "enemy_castle_hp_up",
+      "value": 1,
+      "description": "敵城体力が上昇"
+    }
+  ],
+  "stages":
+  [
+    {
+      "name": "ステージ1",
+      "distance": 2600,
+      "castle_hp": 100,
+      "max_spawn": 5,
+      "enemies": ["ネーコ"],
+      "spawns" : [[300,200,999]],
+      "level": [1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ2",
+      "distance": 3000,
+      "castle_hp": 200,
+      "max_spawn": 7,
+      "enemies": ["ネーコ", "タンクネーコ"],
+      "spawns" : [[300,200,999],[500,500,999]],
+      "level": [2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ3",
+      "distance": 3600,
+      "castle_hp": 400,
+      "max_spawn": 10,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ"],
+      "spawns" : [[400,300,999],[500,500,999],[300,700,999]],
+      "level": [3, 2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ4",
+      "distance": 4600,
+      "castle_hp": 700,
+      "max_spawn": 15,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ"],
+      "spawns" : [[300,200,999],[630,120,999],[310,540,8],[100,400,4]],
+      "level": [4, 3, 2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ5",
+      "distance": 3200,
+      "castle_hp": 1200,
+      "max_spawn": 20,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ", "ウシネーコ"],
+      "spawns" : [[90,120,999],[500,500,999],[700,200,999],[800,800,3],[360,380,7]],
+      "level": [5, 4, 3, 2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ6",
+      "distance": 5000,
+      "castle_hp": 2000,
+      "max_spawn": 30,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ", "ウシネーコ", "ネーコノトーリ"],
+      "spawns" : [[50,70,999],[1400,200,999],[300,260,8],[800,300,5],[500,500,999],[250,2500,2]],
+      "level": [6, 5, 4, 3, 2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ7",
+      "distance": 5600,
+      "castle_hp": 4000,
+      "max_spawn": 36,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ", "ウシネーコ", "ネーコノトーリ", "ネーコフィッシュ"],
+      "spawns" : [[700,40,999],[100,100,999],[150,100,999],[920,100,3],[3000,30,8],[2000,1000,6],[740,900,999]],
+      "level": [7, 6, 5, 4, 3, 2, 1],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ8",
+      "distance": 3000,
+      "castle_hp": 7000,
+      "max_spawn": 10,
+      "enemies": ["タンクネーコ","ウシネーコ", "ネーコノトーリ", "ネーコフィッシュ", "ネーコトカゲ"],
+      "spawns" : [[50,400,999],[220,300,999],[1700,800,999],[987,333,999],[500,500,999]],
+      "level": [9, 6, 5, 3, 2],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ9",
+      "distance": 6000,
+      "castle_hp": 10000,
+      "max_spawn": 40,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ", "ウシネーコ", "ネーコノトーリ", "ネーコフィッシュ", "ネーコトカゲ", "ネーコ巨神"],
+      "spawns" : [[50,70,999],[80,99,999],[190,135,999],[600,600,999],[970,200,999],[1400,410,999],[300,300,999],[500,300,6],[10,2000,4]],
+      "level": [10, 10, 9, 9, 8, 7, 6, 5, 4],
+      "background": "bg1.png"
+    },
+    {
+      "name": "ステージ10",
+      "distance": 8000,
+      "castle_hp": 50000,
+      "max_spawn": 80,
+      "enemies": ["ネーコ", "タンクネーコ", "バトルネーコ", "キモネーコ", "ウシネーコ", "ネーコノトーリ", "ネーコフィッシュ", "ネーコトカゲ", "ネーコ巨神"],
+      "spawns" : [[20,30,999],[80,62,999],[1900,73,999],[130,300,999],[10,200,999],[4500,66,999],[300,334,999],[111,222,999],[1000,700,999]],
+      "level": [10, 10, 10, 10, 10, 10, 10, 10, 10],
+      "background": "bg1.png"
+    }
+  ],
+  "characters":
+  {
+    "enemies": [
+      {
+        "name": "ネーコ",
+        "params": [false, 100,8,10,[140,-320,140],[8,10,30],false,3,[],0,0,["ネーコ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,18,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],
+        "size": [320, 320]
+      },
+      {
+        "name": "タンクネーコ",
+        "params": [false, 400,2,8,[110,-320,110],[8,8,60],true,1,[],0,0,["タンクネーコ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]],
+        "size": [640 , 640],
+        "x_offset": 200
+      },
+      {
+        "name": "バトルネーコ",
+        "params": [false, 200,25,12,[150,-320,150],[8,8,20],false,3,[{"name":"meppo","value":["red"]}],0,0,["バトルネーコ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]],
+        "size": [640 , 640],
+        "x_offset": 180
+      },
+      {
+        "name": "キモネーコ",
+        "params": [false, 400,100,10,[350,-320,350],[8,8,120],false,3,[],-50,0,["キモネーコ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]],
+        "size": [800 , 1600]
+      },
+      {
+        "name": "ウシネーコ",
+        "params": [false, 500,13,30,[140,-320,140],[6,4,0],false,5,[],0,0,["ウシネーコ"]],
+        "move_count": [2,10,[1,1,1,1,1,2,2,2,2,2]],
+        "attack_count": [2,10,[1,1,1,1,1,1,2,2,2,2]],
+        "size": [640 , 640]
+      },
+      {
+        "name": "ネーコノトーリ",
+        "params": [false, 300,140,10,[170,-320,170],[10,4,40],true,4,[{"name":"meppo","value":["red"]}],0,0,["ネーコノトーリ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,14,[1,1,1,1,1,1,1,1,1,1,2,2,2,2]],
+        "size": [960 , 1440]
+      },
+      {
+        "name": "ネーコフィッシュ",
+        "params": [false, 700,180,10,[150,-320,150],[10,8,44],false,3,[],0,0,["ネーコフィッシュ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,18,[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]],
+        "size": [640 , 640],
+        "x_offset": 0
+      },
+      {
+        "name": "ネーコトカゲ",
+        "params": [false, 800,350,10,[400,-320,400],[10,4,120],false,3,[],0,0,["ネーコトカゲ"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,14,[1,1,1,1,1,1,1,1,1,1,2,2,2,2]],
+        "size": [640 , 320],
+        "respawn_time": 570,
+        "x_offset": 320
+      },
+      {
+        "name": "ネーコ巨神",
+        "params": [false, 1000,280,8,[150,-320,150],[18,8,50],true,1,[],0,0,["ネーコ巨神"]],
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]],
+        "attack_count": [2,26,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]],
+        "size": [800 , 800],
+        "respawn_time": 810,
+        "x_offset": 200
+      }
+    ],
+    "allies": [
+      {
+        "name": "わんーこ", 
+        "params": [true, 90,8,5,[110,-320,110],[8,8,40],false,3,[],0,0], 
+        "move_count": [3,16,[1,1,1,1,2,2,2,2,3,3,3,3,2,2,2,2]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], 
+        "size": [320 , 320],
+        "etc":{
+          "cost": 4,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 500,
+            "respawn": 250,
+            "spawn_num": 5,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "にょーろ", 
+        "params": [true, 100,15,8,[110,-320,110],[8,8,30],false,3,[],0,0], 
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], 
+        "size": [480 , 320],
+        "x_offset": 160,
+        "etc":{
+          "cost": 5,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 500,
+            "respawn": 300,
+            "spawn_num": 5,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "例のやつら", 
+        "params": [true, 200,20,10,[110,-320,110],[10,6,20],false,1,[],0,0], 
+        "move_count": [1,1,[1]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2]], 
+        "size": [480 , 480],
+        "x_offset": 160,
+        "etc":{
+          "cost": 6,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 400,
+            "respawn": 400,
+            "spawn_num": 4,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "カバちゃーん", 
+        "params": [true, 1000,100,4,[160,-320,160],[8,8,60],true,1,[],0,0], 
+        "move_count": [4,16,[1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4]], 
+        "attack_count": [4,16,[1,1,2,2,2,2,2,2,3,3,4,4,4,4,4,4]], 
+        "size": [500 , 500],
+        "x_offset": 160,
+        "etc":{
+          "cost": 11,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 1500,
+            "respawn": 800,
+            "spawn_num": 2,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "ブタヤロー", 
+        "params": [true, 1500,120,5,[150,-320,150],[14,2,60],true,2,[],0,0,["red"]], 
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2]], 
+        "size": [540 , 540],
+        "x_offset": 160,
+        "etc":{
+          "cost": 14,
+          "enhancement":{
+            "magnification": 0.5,
+            "first_wait": 800,
+            "respawn": 500,
+            "spawn_num": 4,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "ジャッキ・ペーン", 
+        "params": [true, 1300,80,11,[150,-320,150],[8,8,10],false,3,[],0,0], 
+        "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], 
+        "size": [480 , 480],
+        "x_offset": 160,
+        "etc":{
+          "cost": 25,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 2100,
+            "respawn": 210,
+            "spawn_num": 10,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "ゴーリさん", 
+        "params": [true, 1000,80,15,[150,-320,150],[8,8,2],true,3,[],0,0], 
+        "move_count": [1,1,[1]], 
+        "attack_count": [3,16,[1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,3]], 
+        "size": [700 , 700],
+        "x_offset": 160,
+        "etc":{
+          "cost": 18,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 900,
+            "respawn": 1200,
+            "spawn_num": 2,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "かおるちゃん", 
+        "params": [true, 99999,2000,1,[340,-320,340],[34,8,273],true,2,[],0,0], 
+        "move_count": [1,1,[1]], 
+        "attack_count": [2,42,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], 
+        "size": [900 , 900],
+        "x_offset": 160,
+        "etc":{
+          "cost": 40,
+          "enhancement":{
+            "magnification": 0.1,
+            "first_wait": 30,
+            "respawn": 9999,
+            "spawn_num": 1,
+            "ability": {}
+          }
+        }
+      },
+      {
+        "name": "アル犬デス", 
+        "params": [true, 200000,699,3,[50,-320,50],[6,6,0],false,1,[],0,0], 
+        "move_count": [2,20,[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]], 
+        "attack_count": [2,16,[1,1,1,1,1,1,2,2,2,2,2,2]], 
+        "size": [720 , 720],
+        "x_offset": 0,
+        "etc":{
+          "cost": 999,
+          "enhancement":{
+            "magnification": 1,
+            "first_wait": 6000,
+            "respawn": 30,
+            "spawn_num": 1,
+            "ability": {}
+          }
+        }
+      }
+    ]
+  }
+}
