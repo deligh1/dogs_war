@@ -244,7 +244,7 @@ class Enhancement:
             if self.reward_button.collidepoint(event.pos):
                 if self.game.coin < self.game.data2["costs"]["reward"]:
                     return
-                self.game.data2["reward"] += 15
+                self.game.data2["reward"] += 10
                 self.game.coin -= self.game.data2["costs"]["reward"]
                 self.other_update()
             

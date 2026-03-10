@@ -12,7 +12,7 @@ class character:
         self.attack_time = attack_time # 攻撃関連の時間　(発生、硬直、待機)
         self.area = area # 範囲攻撃かどうか
         self.kb = kb # ノックバック回数
-        self.ability = ability # 特殊能力　[{"name": "能力名", "value": [能力の値]}, ...]
+        self.ability = ability # 特殊能力　{"能力名": {"value": [能力の値]}, ...}
         self.attribute = attribute
 
         self.hp = self.max_hp # 現在の体力
@@ -121,25 +121,23 @@ class character:
                             targets = [character]
         for character in targets:
             damage = self.ap * (0.5 if self.status["down"] else 1)
-            for ability in self.ability:
-                if ability["name"] == "meppo":
-                    for attribute in ability["value"]:
-                        if attribute in character.attribute:
-                            damage *= 1.5
-                if ability["name"] == "stop" and random.random < ability["value"][1]:
-                    character.status["stop"] = ability["value"][0]
-                elif ability["name"] == "slow" and random.random < ability["value"][1]:
-                    character.status["slow"] = ability["value"][0]
-                elif ability["name"] == "down" and random.random < ability["value"][1]:
-                    character.status["down"] = ability["value"][0]
-                elif ability["name"] == "back" and random.random < ability["value"][1]:
-                    character.status["back"] = ability["value"][0]
-            for ability in character.ability:
-                if ability["name"] == "meppo":
-                    for attribute in ability["value"]:
-                        if attribute in self.attribute:
-                            damage // 2
-                if ability["name"] == "invalid" and random.random < ability["value"][1]:
+            if "meppo" in self.ability:
+                for attribute in self.ability["meppo"]["value"]:
+                    if attribute in character.attribute:
+                        damage *= 1.5
+            if ("stop" in self.ability) and random.random < self.ability["stop"]["value"][1]:
+                character.status["stop"] = self.ability["stop"]["value"][0]
+            if ("slow" in self.ability) and random.random < self.ability["slow"]["value"][1]:
+                character.status["slow"] = self.ability["slow"]["value"][0]
+            if ("down" in self.ability) and random.random < self.ability["down"]["value"][1]:
+                character.status["down"] = self.ability["down"]["value"][0]
+            if ("back" in self.ability) and random.random < self.ability["back"]["value"][1]:
+                character.status["back"] = self.ability["back"]["value"][0]
+            if "meppo" in character.ability:
+                for attribute in character.ability["meppo"]["value"]:
+                    if attribute in self.attribute:
+                        damage // 2
+                if ("invalid" in character.ability) and random.random < character.ability["invalid"]["value"][1]:
                     damage = 0
             character.hp -= damage
         

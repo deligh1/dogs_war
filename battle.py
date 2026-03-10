@@ -221,7 +221,7 @@ class Battle:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for i, rect in enumerate(self.character_buttons):
                 if rect.collidepoint(event.pos):
-                    print(i)
+                    # print(i)
                     self.spawn_character(name=self.allies[i]["name"])
                     break
             if self.lose_button.collidepoint(event.pos):

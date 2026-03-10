@@ -41,8 +41,8 @@ class Game:
         self.slots = [0]
         self.stage = 0
         self.allies = [{"name":a, "size":self.ally_characters[a]["size"]} for a in self.data2["allies"]]
-        self.coin = 50
-        self.n = 3
+        self.coin = 100
+        self.n = 4
         
 
     def loop(self):
@@ -62,7 +62,7 @@ class Game:
         pygame.quit()
 
     def change_scene(self, key):
-        print(key)
+        # print(key)
         if key == "return":
             self.load()
             self.load2()
@@ -98,25 +98,40 @@ class Game:
     
     def shaffle_items(self):
         self.now_items = []
-        while len(self.now_items) < self.n:
-            r = random.choice(self.items)
-            if random.random() < r["percent"]:
-                if "{character}" in r["name"]:
-                    shoji = [i["name"] for i in self.allies]
-                    if r["effect"] == "character_unlock":
-                        a = [i["name"] for i in self.data["characters"]["allies"] if i["name"] not in shoji]
-                    else:
-                        a = [i["name"] for i in self.data["characters"]["allies"] if i["name"] in shoji]
-                    c = random.choice(a)
-                    rr = copy.deepcopy(r)
-                    rr["name"] = r["name"].replace("{character}", c)
-                    rr["value"][0] = r["value"][0].replace("{character}", c)
-                    rr["description"] = r["description"].replace("{character}", c)
-                    r = rr
+        for j in range(self.n):
+            items = []
+            is_character = random.random() < self.data["items"]["character_percent"]
+            if is_character:
+                character = random.choice(self.data["characters"]["allies"])
+                if character["name"] in [i["name"] for i in self.allies]:
+                    items = self.data["items"]["characters"]["unlocked"]
+                else:
+                    items = self.data["items"]["characters"]["locked"]
+            else:
+                items = self.data["items"]["others"]
+            while True:
+                r = random.choice(items)
+                if random.random() < r["percent"]:
+                    if type(r["value"]) == list and "{character}" in r["value"]:
+                        c = character["name"]
+                        rr = copy.deepcopy(r)
+                        rr["name"] = r["name"].replace("{character}", c)
+                        rr["value"][0] = r["value"][0].replace("{character}", c)
+                        rr["description"] = r["description"].replace("{character}", c)
+                        r = rr
+                    if type(r["value"]) == list and "{enemy}" in r["value"]:
+                        enemy = random.choice(self.data["characters"]["enemies"])
+                        c = enemy["name"]
+                        rr = copy.deepcopy(r)
+                        rr["name"] = r["name"].replace("{enemy}", c)
+                        rr["value"][0] = r["value"][0].replace("{enemy}", c)
+                        rr["description"] = r["description"].replace("{enemy}", c)
+                        r = rr
+                    break
                     # print(c,rr)
                 
-                e = random.choice(self.enemy_enhancements)
-                self.now_items.append({"ally": r, "enemy": e})
+            e = random.choice(self.enemy_enhancements)
+            self.now_items.append({"ally": r, "enemy": e})
 
         # items = [
         # {
@@ -149,6 +164,20 @@ class Game:
             self.allies.append({"name": item["value"][0], "size": self.ally_characters[item["value"][0]]["size"]})
         elif item["effect"] == "character_upgrade":
             self.data2["allies"][item["value"][0]]["items"]["magnification"] *= item["value"][1]
+        elif item["effect"] == "reward_up":
+            self.data2["items"]["reward"] *= item["value"]
+        elif item["effect"] == "castle_hp_up":
+            self.data2["items"]["castle_hp"] *= item["value"]
+        elif item["effect"] == "meppo":
+            if "meppo" in [i["name"] for i in self.data2["allies"][item["value"][0]]["param"][9]]:
+                self.data2["allies"][item["value"][0]]["params"][9]["meppo"]["value"].append(item["value"][1])
+            else:
+                self.data2["allies"][item["value"][0]]["params"][9]["meppo"] = {"value": [item["value"][1]]}
+        else:
+            raise ValueError("強化処理がありません")
+        
+        enemy = items["enemy"]
+        self.data2["enemies"][enemy["value"][0]] += enemy["value"][1]
     
     def ready_battle(self):
         # magnification注意
@@ -157,7 +186,7 @@ class Game:
         characters = []
         for i in self.slots:
             chara = copy.deepcopy(self.data2["allies"][self.allies[i]["name"]]["status"])
-            print(chara)
+            # print(chara)
             magnification = self.data2["allies"][self.allies[i]["name"]]["enhancement"]["magnification"] * self.data2["allies"][self.allies[i]["name"]]["items"]["magnification"]
             chara["params"][1] = int(chara["params"][1] * magnification)
             chara["params"][2] = int(chara["params"][2] * magnification)
