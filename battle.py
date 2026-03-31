@@ -16,6 +16,7 @@ class Battle:
             "attack":[pygame.transform.scale(pygame.image.load(f"assets/images/characters/{c['name']}/attack{i+1}.png"), (self.width * c["size"][0] / distance, self.width * c["size"][1] / distance)) for i in range(c["attack_count"][0])],
             "kb":pygame.transform.scale(pygame.image.load(f"assets/images/characters/{c['name']}/kb.png"), (self.width * c["size"][0] / distance, self.width * c["size"][1] / distance))}
               for c in characters}
+        self.death_img = pygame.transform.scale(pygame.image.load(f"assets/images/characters/death.png"), (self.width * 240 / distance, self.width * 360 / distance))
         self.distance = distance
         self.background = pygame.image.load(background)
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
@@ -148,6 +149,8 @@ class Battle:
                     img = self.characters_images[c["name"]]["move"][self.characters_dict[c["name"]]["move_count"][2][(c["timer"]-1) % self.characters_dict[c["name"]]["move_count"][1]] - 1]
                 elif c["state"] == "wait":
                     img = self.characters_images[c["name"]]["move"][0]
+                elif c["state"] == "dead":
+                    img = self.death_img
             except FileNotFoundError:
                 img = None
             if img is not None:

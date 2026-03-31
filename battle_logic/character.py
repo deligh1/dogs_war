@@ -48,6 +48,7 @@ class character:
             dx = self.speed / 2 * (1 if self.isally else -1)
             if self.status["stop"] > 0:
                 dx = 0
+                self.timer -= 1
             elif self.status["slow"] > 0:
                 dx = 0.25 * (1 if self.isally else -1)
             self.x += dx
@@ -124,20 +125,20 @@ class character:
             if "meppo" in self.ability:
                 for attribute in self.ability["meppo"]["value"]:
                     if attribute in character.attribute:
-                        damage *= 1.5
-            if ("stop" in self.ability) and random.random < self.ability["stop"]["value"][1]:
+                        damage *= 1.8
+            if ("stop" in self.ability) and random.random() < self.ability["stop"]["value"][1]:
                 character.status["stop"] = self.ability["stop"]["value"][0]
-            if ("slow" in self.ability) and random.random < self.ability["slow"]["value"][1]:
+            if ("slow" in self.ability) and random.random() < self.ability["slow"]["value"][1]:
                 character.status["slow"] = self.ability["slow"]["value"][0]
-            if ("down" in self.ability) and random.random < self.ability["down"]["value"][1]:
+            if ("down" in self.ability) and random.random() < self.ability["down"]["value"][1]:
                 character.status["down"] = self.ability["down"]["value"][0]
-            if ("back" in self.ability) and random.random < self.ability["back"]["value"][1]:
+            if ("back" in self.ability) and random.random() < self.ability["back"]["value"][1]:
                 character.status["back"] = self.ability["back"]["value"][0]
             if "meppo" in character.ability:
                 for attribute in character.ability["meppo"]["value"]:
                     if attribute in self.attribute:
-                        damage // 2
-                if ("invalid" in character.ability) and random.random < character.ability["invalid"]["value"][1]:
+                        damage //= 2.5
+                if ("invalid" in character.ability) and random.random() < character.ability["invalid"]["value"][1]:
                     damage = 0
             character.hp -= damage
         
