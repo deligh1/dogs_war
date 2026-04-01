@@ -1,5 +1,5 @@
 {
-  "castle_hp": 100,
+  "castle_hp": 1000,
   "slot": 1,
   "max_spawn": 5,
   "reward": 100,

@@ -39,11 +39,11 @@ class Game:
         for i in (self.data2["allies"]):
             self.data2["allies"][i]["status"] = copy.deepcopy(self.ally_characters[i])
         self.slots = [0]
+        self.mode = None
         self.stage = 0
         self.allies = [{"name":a, "size":self.ally_characters[a]["size"]} for a in self.data2["allies"]]
         self.coin = 100
         self.n = 4
-        
 
     def loop(self):
         self.running = True
@@ -69,7 +69,8 @@ class Game:
             self.scene = opening.Opening(self, self.width, self.height)
             self.state = "opening"
         elif self.state == "opening":
-            if key == "start":
+            if key == "start_hard" or "start_normal" or "start_easy":
+                self.mode = key[6:]
                 items = self.shaffle_items()
                 self.scene = item_select.Select(self, self.width, self.height, items)
                 self.state = "item_select"
@@ -85,7 +86,7 @@ class Game:
             self.bai = 1
             if key == "ally_win":
                 self.stage += 1
-                if self.stage == len(self.data["stages"]):
+                if self.stage == len(self.data["stages"][self.mode]):
                     self.scene = result.Result(self, self.width, self.height)
                     self.state = "result"
                 else:
@@ -181,7 +182,7 @@ class Game:
     
     def ready_battle(self):
         # magnification注意
-        stage = self.data["stages"][self.stage]
+        stage = self.data["stages"][self.mode][self.stage]
 
         characters = []
         for i in self.slots:

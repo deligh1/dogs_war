@@ -10,7 +10,7 @@ class Result:
         self.font1 = pygame.font.Font(self.font_address, 70)
         self.font2 = pygame.font.Font(self.font_address, 40)
 
-        self.result_text = self.font1.render(f"{self.game.stage} / {len(self.game.data['stages'])}", True, (0,0,0))
+        self.result_text = self.font1.render(f"{self.game.stage} / {len(self.game.data['stages'][self.game.mode])}", True, (0,0,0))
         self.title_text = self.font2.render("タイトルへ", True, (0,0,0))
         self.title_text_rect = self.title_text.get_rect()
         self.title_text_rect.center = (self.width // 2, self.height * 0.7)
