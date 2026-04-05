@@ -8,8 +8,8 @@ class battle:
         self.distance = distance
         self.characters = []
 
-        self.ally_castle = character.character(self, True, "ally_castle", ally_castle_hp, 0, 0, (0, 0, 0), (0, 0, 0), False, 1e-10, [], 800, 0, 0)
-        self.enemy_castle = character.character(self, False, "enemy_castle", enemy_castle_hp, 0, 0, (0, 0, 0), (0, 0, 0), False, 1e-10, [], distance-800, 0, 0)
+        self.ally_castle = character.character(self, True, "ally_castle", ally_castle_hp, 0, 0, (0, 0, 0), (0, 0, 0), False, 1e-10, [], 800, 0, 0, invalid=["back","stop","slow","down"])
+        self.enemy_castle = character.character(self, False, "enemy_castle", enemy_castle_hp, 0, 0, (0, 0, 0), (0, 0, 0), False, 1e-10, [], distance-800, 0, 0, invalid=["back","stop","slow","down"])
         self.characters.append(self.ally_castle)
         self.characters.append(self.enemy_castle)
         self.result = "ongoing"

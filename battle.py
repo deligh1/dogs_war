@@ -137,7 +137,7 @@ class Battle:
                 continue
             img = None
             try:
-                if c["state"] == "kb":
+                if c["state"] == "kb" or c["state"] == "back":
                     img = self.characters_images[c["name"]]["kb"]
                 elif c["state"] == "attack":
                     # print(self.characters_dict[c["name"]]["attack_count"][2][c["timer"] % self.characters_dict[c["name"]]["attack_count"][1]])

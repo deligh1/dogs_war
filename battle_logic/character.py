@@ -1,7 +1,7 @@
 import random
 
 class character:
-    def __init__(self, battle, isally, name, hp, ap, speed, range, attack_time, area, kb, ability, x, y, z, attribute = []):
+    def __init__(self, battle, isally, name, hp, ap, speed, range, attack_time, area, kb, ability, x, y, z, attribute = [], invalid = []):
         self.battle = battle # 戦闘オブジェクト
         self.isally = isally # 味方かどうか
         self.name = name # キャラクター名　画像ファイル名も兼任
@@ -14,6 +14,7 @@ class character:
         self.kb = kb # ノックバック回数
         self.ability = ability # 特殊能力　{"能力名": {"value": [能力の値]}, ...}
         self.attribute = attribute
+        self.invalid = invalid
 
         self.hp = self.max_hp # 現在の体力
         self.x = x # 横
@@ -31,7 +32,7 @@ class character:
             self.state = "kb"
             self.timer = 0
             self.kb_hp = (self.hp - 1) // (self.max_hp / self.kb) * (self.max_hp / self.kb)
-        elif self.status["back"] > 0: # 多分バグる
+        elif self.status["back"] > 0  and self.state != "dead" and self.state != "kb": # 多分バグる
             self.state = "back"
         if (self.state == "move" or self.state == "wait") and self.search(self.battle.characters) and self.cooldown == 0:
             self.state = "attack"
@@ -127,13 +128,17 @@ class character:
                     if attribute in character.attribute:
                         damage *= 1.8
             if ("stop" in self.ability) and random.random() < self.ability["stop"]["value"][1]:
-                character.status["stop"] = self.ability["stop"]["value"][0]
+                if "stop" not in character.invalid:
+                    character.status["stop"] = self.ability["stop"]["value"][0]
             if ("slow" in self.ability) and random.random() < self.ability["slow"]["value"][1]:
-                character.status["slow"] = self.ability["slow"]["value"][0]
+                if "slow" not in character.invalid:
+                    character.status["slow"] = self.ability["slow"]["value"][0]
             if ("down" in self.ability) and random.random() < self.ability["down"]["value"][1]:
-                character.status["down"] = self.ability["down"]["value"][0]
+                if "down" not in character.invalid:
+                    character.status["down"] = self.ability["down"]["value"][0]
             if ("back" in self.ability) and random.random() < self.ability["back"]["value"][1]:
-                character.status["back"] = self.ability["back"]["value"][0]
+                if "back" not in character.invalid:
+                    character.status["back"] = self.ability["back"]["value"][0]
             if "meppo" in character.ability:
                 for attribute in character.ability["meppo"]["value"]:
                     if attribute in self.attribute:
