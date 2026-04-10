@@ -57,7 +57,7 @@ class Battle:
         self.bai_button = pygame.Rect(self.width * 0.59, self.height * 0.05, self.width * 0.1, self.height * 0.1)
         self.bai_button_text = self.font1.render("倍速", True, (0,0,0))
 
-        self.next_button_text = self.font1.render("次へ", True, (255, 255, 255))
+        self.next_button_text = self.font1.render("次へ", True, (0, 0, 0))
         self.next_button_rect = self.next_button_text.get_rect()
 
     def step(self):
@@ -196,7 +196,7 @@ class Battle:
         if data["result"] != "ongoing":
             if data["result"] == "ally_win":
                 # 帯域を塗りつぶす
-                overlay = pygame.Surface((self.width, self.height // 4))
+                overlay = pygame.Surface((self.width, self.height // 4 + 30))
                 overlay.set_alpha(128)
                 overlay.fill((0, 0, 0))
                 screen.blit(overlay, (0, self.height // 2 - self.height // 8))
@@ -214,11 +214,13 @@ class Battle:
                 result_text = self.font2.render("敗北...", True, (255, 255, 255))
                 screen.blit(result_text, (self.width // 2 - result_text.get_width() // 2, self.height // 2 - result_text.get_height() // 2))
             
-            self.next_button_rect.center = (self.width // 2, self.height // 2 + result_text.get_height())
+            self.next_button_rect.center = (self.width // 2, self.height // 2 + result_text.get_height() + 50)
+            pygame.draw.rect(screen, (255,255,0), self.next_button_rect)
             screen.blit(self.next_button_text, self.next_button_rect)
+            
     
     def scaling(self, x, y):
-        return x * self.width / self.distance, self.height - y * self.height / 1000 - 100
+        return x * self.width / self.distance, self.height - y * self.width / self.distance - 100
     
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
