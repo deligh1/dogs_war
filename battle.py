@@ -1,5 +1,6 @@
 import pygame
 import battle_logic.battle
+import os
 
 class Battle:
     def __init__(self, game, width, height, characters, castles, distance, background, allies, enemies, reward=100, ally_max_spawn=5, enemy_max_spawn=5):
@@ -16,6 +17,10 @@ class Battle:
             "attack":[pygame.transform.scale(pygame.image.load(f"assets/images/characters/{c['name']}/attack{i+1}.png"), (self.width * c["size"][0] / distance, self.width * c["size"][1] / distance)) for i in range(c["attack_count"][0])],
             "kb":pygame.transform.scale(pygame.image.load(f"assets/images/characters/{c['name']}/kb.png"), (self.width * c["size"][0] / distance, self.width * c["size"][1] / distance))}
               for c in characters}
+        for k,v in self.characters_images.items():
+            if os.path.exists(f"assets/images/characters/{k}/wait.png"):
+                size = self.characters_dict[k]["size"]
+                v["wait"] = pygame.transform.scale(pygame.image.load(f"assets/images/characters/{k}/wait.png"), (self.width * size[0] / distance, self.width * size[1] / distance))
         self.death_img = pygame.transform.scale(pygame.image.load(f"assets/images/characters/death.png"), (self.width * 240 / distance, self.width * 360 / distance))
         self.distance = distance
         self.background = pygame.image.load(background)
@@ -148,7 +153,10 @@ class Battle:
                     # print(self.characters_dict[c["name"]]["move_count"][2][c["timer"] % self.characters_dict[c["name"]]["move_count"][1]])
                     img = self.characters_images[c["name"]]["move"][self.characters_dict[c["name"]]["move_count"][2][(c["timer"]-1) % self.characters_dict[c["name"]]["move_count"][1]] - 1]
                 elif c["state"] == "wait":
-                    img = self.characters_images[c["name"]]["move"][0]
+                    if "wait" in self.characters_images[c["name"]]:
+                        img = self.characters_images[c["name"]]["wait"]
+                    else:
+                        img = self.characters_images[c["name"]]["move"][0]
                 elif c["state"] == "dead":
                     img = self.death_img
             except FileNotFoundError:

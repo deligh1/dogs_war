@@ -8,6 +8,8 @@ class Enhancement:
         self.allies = allies
         self.slots = slots # ex. [0,1,2]
 
+        self.kaisu = 1
+
         self.font_address = "assets/fonts/Yuji_Syuku/YujiSyuku-Regular.ttf"
         self.font1 = pygame.font.Font(self.font_address, 24)
         self.font2 = pygame.font.Font(self.font_address, 48)
@@ -106,8 +108,14 @@ class Enhancement:
 
         self.start_button = pygame.Rect(self.width * 0.82, 10 + self.height * 0.68, self.width * 0.16, self.height * 0.11)
         self.start_button_text = self.font2.render(f"開戦", True, (0,0,0))
-        
 
+        self.kaisu_up_button = pygame.Rect(self.width * 0.62, 10 + self.height * 0.72, self.width * 0.04, self.height * 0.06)
+        self.kaisu_up_button_text = self.font2.render(f"+", True, (0,0,0))
+        
+        self.kaisu_down_button = pygame.Rect(self.width * 0.76, 10 + self.height * 0.72, self.width * 0.04, self.height * 0.06)
+        self.kaisu_down_button_text = self.font2.render(f"-", True, (0,0,0))
+
+        self.kaisu_text = self.font2.render(f"x{self.kaisu}", True, (0,0,0))
 
     def step(self):
         pass
@@ -171,6 +179,11 @@ class Enhancement:
         pygame.draw.rect(screen, (255,255,0), self.start_button) 
         screen.blit(self.start_button_text, (self.start_button.centerx - self.start_button_text.get_width() // 2, self.start_button.centery - self.start_button_text.get_height() // 2))
 
+        pygame.draw.rect(screen, (255,255,0), self.kaisu_up_button) 
+        screen.blit(self.kaisu_up_button_text, (self.kaisu_up_button.centerx - self.kaisu_up_button_text.get_width() // 2, self.kaisu_up_button.centery - self.kaisu_up_button_text.get_height() // 2))
+        pygame.draw.rect(screen, (255,255,0), self.kaisu_down_button) 
+        screen.blit(self.kaisu_down_button_text, (self.kaisu_down_button.centerx - self.kaisu_down_button_text.get_width() // 2, self.kaisu_down_button.centery - self.kaisu_down_button_text.get_height() // 2))
+        screen.blit(self.kaisu_text, ((self.kaisu_up_button.centerx + self.kaisu_down_button.centerx) / 2 - self.kaisu_text.get_width() / 2, (self.kaisu_up_button.centery + self.kaisu_down_button.centery) / 2 - self.kaisu_text.get_height() / 2))
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -186,68 +199,77 @@ class Enhancement:
                     self.selected = i
                     self.character_update()
                     break
-
-            if self.magnification_button.collidepoint(event.pos):
-                # print(12)
-                if self.selected == -1:
-                    return
-                if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
-                    return
-                self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
-                self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["magnification"] += 0.1
-                self.character_update()
-            if self.num_button.collidepoint(event.pos):
-                if self.selected == -1:
-                    return
-                if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
-                    return
-                self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
-                self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["spawn_num"] += 1
-                self.character_update()
-            if self.firstspawn_button.collidepoint(event.pos):
-                if self.selected == -1:
-                    return
-                if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
-                    return
-                self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
-                self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["first_wait"] /= 1.1
-                self.character_update()
-            if self.respawn_button.collidepoint(event.pos):
-                if self.selected == -1:
-                    return
-                if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
-                    return
-                self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
-                self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["respawn"] /= 1.1
-                self.character_update()
-
-            if self.castlehp_button.collidepoint(event.pos):
-                if self.game.coin < self.game.data2["costs"]["castle_hp"]:
-                    return
-                self.game.data2["castle_hp"] += 50
-                self.game.coin -= self.game.data2["costs"]["castle_hp"]
-                self.other_update()
-            if self.slot_button.collidepoint(event.pos):
-                if self.game.coin < self.game.data2["costs"]["slot"]:
-                    return
-                self.game.data2["slot"] += 1
-                self.game.slots.append(-1)
-                self.game.coin -= self.game.data2["costs"]["slot"]
-                self.other_update()
-                self.character_buttons_update()
-            if self.maxspawn_button.collidepoint(event.pos):
-                if self.game.coin < self.game.data2["costs"]["max_spawn"]:
-                    return
-                self.game.data2["max_spawn"] += 1
-                self.game.coin -= self.game.data2["costs"]["max_spawn"]
-                self.other_update()
-            if self.reward_button.collidepoint(event.pos):
-                if self.game.coin < self.game.data2["costs"]["reward"]:
-                    return
-                self.game.data2["reward"] += 10
-                self.game.coin -= self.game.data2["costs"]["reward"]
-                self.other_update()
             
+            if self.kaisu_up_button.collidepoint(event.pos):
+                self.kaisu += 1
+                self.other_update()
+            if self.kaisu_down_button.collidepoint(event.pos):
+                if self.kaisu > 1:
+                    self.kaisu -= 1
+                self.other_update()
+
+            for _ in range(self.kaisu):
+                if self.magnification_button.collidepoint(event.pos):
+                    # print(12)
+                    if self.selected == -1:
+                        return
+                    if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
+                        return
+                    self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
+                    self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["magnification"] += 0.1
+                    self.character_update()
+                if self.num_button.collidepoint(event.pos):
+                    if self.selected == -1:
+                        return
+                    if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
+                        return
+                    self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
+                    self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["spawn_num"] += 1
+                    self.character_update()
+                if self.firstspawn_button.collidepoint(event.pos):
+                    if self.selected == -1:
+                        return
+                    if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
+                        return
+                    self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
+                    self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["first_wait"] /= 1.1
+                    self.character_update()
+                if self.respawn_button.collidepoint(event.pos):
+                    if self.selected == -1:
+                        return
+                    if self.game.coin < self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1:
+                        return
+                    self.game.coin -= self.game.data2["allies"][self.allies[self.selected]["name"]]["cost"] * 1
+                    self.game.data2["allies"][self.allies[self.selected]["name"]]["enhancement"]["respawn"] /= 1.1
+                    self.character_update()
+
+                if self.castlehp_button.collidepoint(event.pos):
+                    if self.game.coin < self.game.data2["costs"]["castle_hp"]:
+                        return
+                    self.game.data2["castle_hp"] += 50
+                    self.game.coin -= self.game.data2["costs"]["castle_hp"]
+                    self.other_update()
+                if self.slot_button.collidepoint(event.pos):
+                    if self.game.coin < self.game.data2["costs"]["slot"]:
+                        return
+                    self.game.data2["slot"] += 1
+                    self.game.slots.append(-1)
+                    self.game.coin -= self.game.data2["costs"]["slot"]
+                    self.other_update()
+                    self.character_buttons_update()
+                if self.maxspawn_button.collidepoint(event.pos):
+                    if self.game.coin < self.game.data2["costs"]["max_spawn"]:
+                        return
+                    self.game.data2["max_spawn"] += 1
+                    self.game.coin -= self.game.data2["costs"]["max_spawn"]
+                    self.other_update()
+                if self.reward_button.collidepoint(event.pos):
+                    if self.game.coin < self.game.data2["costs"]["reward"]:
+                        return
+                    self.game.data2["reward"] += 10
+                    self.game.coin -= self.game.data2["costs"]["reward"]
+                    self.other_update()
+                
             if self.start_button.collidepoint(event.pos):
                 self.game.change_scene("start")
 

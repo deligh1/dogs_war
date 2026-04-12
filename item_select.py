@@ -65,7 +65,7 @@ class Select:
             color = (150, 150, 150) if i != self.selected_index else (200, 200, 200)
             pygame.draw.rect(screen, color, rect)
             screen.blit(self.ally_item_name_surfaces[i], (rect.centerx - self.ally_item_name_surfaces[i].get_width() // 2, rect.top))
-            screen.blit(self.enemy_item_name_surfaces[i], (rect.centerx - self.ally_item_name_surfaces[i].get_width() // 2, rect.top + self.height // 3))
+            screen.blit(self.enemy_item_name_surfaces[i], (rect.centerx - self.enemy_item_name_surfaces[i].get_width() // 2, rect.top + self.height // 3))
             for j, text_surface in enumerate(self.ally_items_text_surfaces[i]):
                 screen.blit(text_surface, (rect.left, rect.top + j * 20 + 40))
             for j, text_surface in enumerate(self.enemy_items_text_surfaces[i]):
