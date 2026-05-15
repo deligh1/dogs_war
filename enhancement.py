@@ -268,6 +268,7 @@ class Enhancement:
                         return
                     self.game.data2["reward"] += 10
                     self.game.coin -= self.game.data2["costs"]["reward"]
+                    self.game.data2["costs"]["reward"] += 2
                     self.other_update()
                 
             if self.start_button.collidepoint(event.pos):

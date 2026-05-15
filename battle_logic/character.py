@@ -91,7 +91,9 @@ class character:
 
         # 状態異常のタイマーを減らす
         for key in self.status:
-            if self.status[key] > 0:
+            if (key + "_invalid") in self.ability:
+                self.status[key] = 0
+            elif self.status[key] > 0:
                 self.status[key] -= 1
         if self.cooldown > 0:
             self.cooldown -= 1
