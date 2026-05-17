@@ -585,7 +585,7 @@
         "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], 
         "size": [320 , 320],
         "etc":{
-          "cost": 4,
+          "cost": 3,
           "enhancement":{
             "magnification": 1,
             "first_wait": 500,
@@ -603,7 +603,7 @@
         "size": [480 , 320],
         "x_offset": 160,
         "etc":{
-          "cost": 5,
+          "cost": 4,
           "enhancement":{
             "magnification": 1,
             "first_wait": 500,
@@ -621,7 +621,7 @@
         "size": [480 , 480],
         "x_offset": 160,
         "etc":{
-          "cost": 6,
+          "cost": 5,
           "enhancement":{
             "magnification": 1,
             "first_wait": 400,
@@ -639,10 +639,10 @@
         "size": [800 , 800],
         "x_offset": 160,
         "etc":{
-          "cost": 11,
+          "cost": 15,
           "enhancement":{
             "magnification": 1,
-            "first_wait": 1500,
+            "first_wait": 1000,
             "respawn": 800,
             "spawn_num": 2,
             "ability": {}
@@ -657,7 +657,7 @@
         "size": [540 , 540],
         "x_offset": 160,
         "etc":{
-          "cost": 14,
+          "cost": 20,
           "enhancement":{
             "magnification": 0.5,
             "first_wait": 800,
@@ -675,7 +675,7 @@
         "size": [480 , 480],
         "x_offset": 160,
         "etc":{
-          "cost": 25,
+          "cost": 18,
           "enhancement":{
             "magnification": 1,
             "first_wait": 2100,
@@ -693,7 +693,7 @@
         "size": [700 , 700],
         "x_offset": 160,
         "etc":{
-          "cost": 21,
+          "cost": 22,
           "enhancement":{
             "magnification": 1,
             "first_wait": 900,
@@ -711,7 +711,7 @@
         "size": [900 , 900],
         "x_offset": 160,
         "etc":{
-          "cost": 40,
+          "cost": 50,
           "enhancement":{
             "magnification": 0.1,
             "first_wait": 30,
@@ -723,7 +723,7 @@
       },
       {
         "name": "アル犬デス", 
-        "params": [true, 5000000,2000,4,[50,-320,70],[6,6,0],true,1,{},0,0], 
+        "params": [true, 5000000,1000,4,[50,-320,70],[6,6,0],true,1,{},0,0], 
         "move_count": [2,20,[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]], 
         "attack_count": [2,12,[1,1,1,1,1,1,2,2,2,2,2,2]], 
         "size": [1440 , 1440],
@@ -753,7 +753,7 @@
         "size": [1080 , 1080],
         "x_offset": 400,
         "etc":{
-          "cost": 22,
+          "cost": 19,
           "enhancement":{
             "magnification": 1,
             "first_wait": 100,
@@ -807,7 +807,7 @@
       },
       {
         "name": "昇龍 沖而", 
-        "params": [true, 8000,360,6,[240,-320,300],[16,48,300],true,4,{"back":{"value":[11,100]}},-180,0], 
+        "params": [true, 8000,360,6,[300,-320,400],[16,48,300],true,4,{"back":{"value":[11,100]}},-180,0], 
         "move_count": [2,30,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]], 
         "attack_count": [2,64,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]], 
         "size": [900 , 1350],
@@ -831,7 +831,7 @@
         "size": [900 , 1350],
         "x_offset": 240,
         "etc":{
-          "cost": 35,
+          "cost": 45,
           "enhancement":{
             "magnification": 0.2,
             "first_wait": 300,
@@ -843,13 +843,13 @@
       },
       {
         "name": "麗華春子", 
-        "params": [true, 800,40,30,[280,-320,290],[10,10,0],true,9,{"stop":{"value":[20,0.1]}},-180,0], 
+        "params": [true, 800,40,30,[300,-320,310],[10,10,0],true,9,{"stop":{"value":[30,0.15]}},-180,0], 
         "move_count": [2,30,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]], 
         "attack_count": [2,20,[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]], 
         "size": [900 , 1350],
         "x_offset": 300,
         "etc":{
-          "cost": 16,
+          "cost": 20,
           "enhancement":{
             "magnification": 1,
             "first_wait": 1500,

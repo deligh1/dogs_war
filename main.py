@@ -170,9 +170,9 @@ class Game:
         elif item["effect"] == "castle_hp_up":
             self.data2["items"]["castle_hp"] *= item["value"]
         elif item["effect"] == "meppo":
-            print(type(self.data2["allies"][item["value"][0]]["status"]))
+            # print(type(self.data2["allies"][item["value"][0]]["status"]))
             # print(self.data2["allies"][item["value"][0]]["status"])
-            print(self.data2["allies"][item["value"][0]]["status"]["params"])
+            # print(self.data2["allies"][item["value"][0]]["status"]["params"])
             if "meppo" in [i for i in self.data2["allies"][item["value"][0]]["status"]["params"][8]]:
                 self.data2["allies"][item["value"][0]]["status"]["params"][8]["meppo"]["value"].append(item["value"][1])
             else:
