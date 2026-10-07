@@ -1,7 +1,7 @@
 import pygame
 import json
 
-from battle import Battle
+from test_battle import Battle
 
 class Game:
     def __init__(self):
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     screen_size = (1200, 700)
     screen = pygame.display.set_mode(screen_size)
     clock = pygame.time.Clock()
-    ally_names = ["わんーこ","にょーろ","クマせんせー"]
+    ally_names = ["クマせんせー"]
     enemy_names = ["ネーコ"]
     characters = [
         # {"name": "ネーコ", "params": (False, 100,8,10,(140,-320,140),(8,10,30),False,3,[],0,0), "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]], "attack_count": [2,18,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]], "size": (320, 320)},
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         characters.append(game.ally_characters[name])
     for name in enemy_names:
         characters.append(game.enemy_characters[name])
-        print(characters)
+        # print(characters)
     castles = [
         {"hp": 100},
         {"hp": 100},
@@ -48,12 +48,12 @@ if __name__ == "__main__":
     # ]
     allies = []
     for name in ally_names:
-        allies.append({"name": name, "first_spawn": 30, "respawn_time": 300, "spawn_num": 5, "auto_spawn": True, "auto_respawn": True})
+        allies.append({"name": name, "first_spawn": 30, "respawn_time": 300, "spawn_num": 1, "auto_spawn": True, "auto_respawn": True})
     enemies = []
     for name in enemy_names:
-        enemies.append({"name": name, "first_spawn": 30, "respawn_time": 300, "spawn_num": 5, "auto_spawn": True, "auto_respawn": True})
+        enemies.append({"name": name, "first_spawn": 30, "respawn_time": 30, "spawn_num": 100, "auto_spawn": True, "auto_respawn": True})
     distance = 4600
-    battle = Battle(game, screen_size[0], screen_size[1], characters, castles, distance, "assets/images/back_grounds/back_ground1.png", allies, enemies)
+    battle = Battle(game, screen_size[0], screen_size[1], characters, castles, distance, "assets/images/back_grounds/back_ground1.png", allies, enemies, ally_max_spawn=100, enemy_max_spawn=100)
     running = True
     while running:
         for event in pygame.event.get():
