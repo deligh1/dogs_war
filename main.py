@@ -213,7 +213,7 @@ class Game:
                    "respawn_time":self.data2["allies"][self.allies[i]["name"]]["enhancement"]["respawn"] // self.data2["allies"][self.allies[i]["name"]]["items"]["respawn"],
                    "spawn_num":int(self.data2["allies"][self.allies[i]["name"]]["enhancement"]["spawn_num"] * self.data2["allies"][self.allies[i]["name"]]["items"]["spawn_num"]),
                    "auto_spawn":self.data2["allies"][self.allies[i]["name"]]["auto_spawn"],
-                   "auto_respawn":self.data2["allies"][self.allies[i]["name"]]["auto_respawn"]} for i in self.slots]
+                   "auto_respawn":self.data2["allies"][self.allies[i]["name"]]["auto_respawn"]} for i in self.slots if i >= 0]
         enemies = [{"name":name, "first_spawn":stage["spawns"][i][0], "respawn_time":stage["spawns"][i][1] // (0.9 ** self.data2["enemies"]["再生産"]),
                     "spawn_num":stage["spawns"][i][2], "auto_spawn":True, "auto_respawn":True} for i,name in enumerate(stage["enemies"])]
         

@@ -27,7 +27,7 @@ class Enhancement:
     def allies_update(self):
         self.allies_rect = pygame.Rect(8, 6, self.width * 0.3 - 8, self.height * 0.8)
         self.allies_buttons = []
-        for i in range(len(self.allies)):
+        for i in range(len(self.allies)+1):
             r = i % 3
             c = i // 3
             self.allies_buttons.append(pygame.Rect(self.width * 0.095 * r + 10, c * 100 + 10, self.width * 0.09, 90))
@@ -128,11 +128,11 @@ class Enhancement:
             screen.blit(self.character_img[self.slots[i]], self.character_buttons[i])
             pygame.draw.rect(screen, (0,0,0), self.character_buttons[i], width=4)
 
-        pygame.draw.rect(screen, (50,255,50), self.allies_rect)
+        pygame.draw.rect(screen, (80,255,80), self.allies_rect)
         for i in range(len(self.allies_buttons)):
             pygame.draw.rect(screen, (255,255,255), self.allies_buttons[i])
-            color = (0,255,0) if i == self.selected else (0,0,0)
-            screen.blit(self.character_img[i], self.allies_buttons[i])
+            color = (0,200,0) if i-1 == self.selected else (0,0,0)
+            screen.blit(self.character_img[i-1], self.allies_buttons[i])
             pygame.draw.rect(screen, color, self.allies_buttons[i], width=4)
 
         pygame.draw.rect(screen, (170,170,255), self.character_rect)
@@ -189,14 +189,14 @@ class Enhancement:
         if event.type == pygame.MOUSEBUTTONDOWN:
             for i, rect in enumerate(self.character_buttons):
                 if rect.collidepoint(event.pos):
-                    if self.selected in self.slots:
+                    if self.selected >= 0 and self.selected in self.slots:
                         pass
                     else:
                         self.slots[i] = self.selected
                     break
             for i, rect in enumerate(self.allies_buttons):
                 if rect.collidepoint(event.pos):
-                    self.selected = i
+                    self.selected = i - 1
                     self.character_update()
                     break
             
