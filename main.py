@@ -8,6 +8,7 @@ import item_select
 import enhancement
 import battle
 import result
+import htp
 
 class Game:
     def __init__(self, width, height):
@@ -69,11 +70,13 @@ class Game:
             self.scene = opening.Opening(self, self.width, self.height)
             self.state = "opening"
         elif self.state == "opening":
-            if key == "start_hard" or "start_normal" or "start_easy":
+            if key == "start_hard" or key == "start_normal" or key == "start_easy":
                 self.mode = key[6:]
                 items = self.shaffle_items()
                 self.scene = item_select.Select(self, self.width, self.height, items)
                 self.state = "item_select"
+            if key == "start_htp":
+                self.scene = htp.Htp(self, self.width, self.height)
         elif self.state == "item_select":
             self.selected_item(self.now_items[key])
             self.scene = enhancement.Enhancement(self, self.width, self.height, self.allies, self.slots)
@@ -225,5 +228,6 @@ class Game:
 
 
 if __name__ == "__main__":
+    # print("abc\ndef")
     game = Game(1200,700)
     game.loop()

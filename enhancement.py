@@ -52,7 +52,10 @@ class Enhancement:
             cost = self.game.data2["allies"][name]["cost"]
             enhancement = self.game.data2["allies"][name]["enhancement"]
             items = self.game.data2["allies"][name]["items"]
+            ability = self.game.data2["allies"][name]["status"]["params"][8]
+            description = self.game.ally_characters[name]["description"]
         else:
+            name = ""
             cost = 0
             enhancement = {"magnification": 0,
                 "first_wait": 0,
@@ -66,21 +69,57 @@ class Enhancement:
                 "spawn_num": 1,
                 "ability": {}
             }
+            ability = {}
+            description = ""
         self.magnification_text = self.font1.render(f"強化倍率：{enhancement['magnification'] * items['magnification']:.2f}倍", True, (0,0,0))
         self.magnification_button = pygame.Rect(self.width * 0.65, 10, self.width * 0.13, self.height * 0.05)
-        self.magnification_button_text = self.font1.render(f"強化　{cost} G", True, (0,0,0))
+        self.magnification_button_text = self.font1.render(f"強化　{cost * self.kaisu} G", True, (0,0,0))
 
         self.num_text = self.font1.render(f"個体数　：{int(enhancement['spawn_num'] * items['spawn_num'])}体", True, (0,0,0))
         self.num_button = pygame.Rect(self.width * 0.65, 10 + self.height * 0.055, self.width * 0.13, self.height * 0.05)
-        self.num_button_text = self.font1.render(f"増加　{cost} G", True, (0,0,0))
+        self.num_button_text = self.font1.render(f"増加　{cost * self.kaisu} G", True, (0,0,0))
 
         self.firstspawn_text = self.font1.render(f"初期待機：{enhancement['first_wait'] / 30 / items['first_wait']:.2f}秒", True, (0,0,0))
         self.firstspawn_button = pygame.Rect(self.width * 0.65, 10 + self.height * 0.11, self.width * 0.13, self.height * 0.05)
-        self.firstspawn_button_text = self.font1.render(f"短縮　{cost} G", True, (0,0,0))
+        self.firstspawn_button_text = self.font1.render(f"短縮　{cost * self.kaisu} G", True, (0,0,0))
         
         self.respawn_text = self.font1.render(f"再生産　：{enhancement['respawn'] / 30 / items['respawn']:.2f}秒", True, (0,0,0))
         self.respawn_button = pygame.Rect(self.width * 0.65, 10 + self.height * 0.165, self.width * 0.13, self.height * 0.05)
-        self.respawn_button_text = self.font1.render(f"短縮　{cost} G", True, (0,0,0))
+        self.respawn_button_text = self.font1.render(f"短縮　{cost * self.kaisu} G", True, (0,0,0))
+
+        # 能力
+        self.abilities = []
+        j = 0
+        for k,v in ability.items():
+            meppo = False
+            targets_img = []
+            if k == "meppo":
+                meppo = True
+                ability_text = self.font1.render(f"めっぽう強い", True, (0,0,0))
+                targets = v['value']
+                for ii,i in enumerate(targets):
+                    img = pygame.image.load(f"assets/images/characters/{i}/window.png")
+                    x, y = img.get_size()
+                    targets_img.append((pygame.transform.scale(img, (self.height * 0.1 * x // y, self.height * 0.1)),
+                                        pygame.Rect(self.width * (0.5 + 0.3 * ii / len(targets)), self.height * (0.25 + 0.07 * j), self.width * 0.08, self.height * 0.1)))
+            elif k == "stop":
+                ability_text = self.font1.render(f"動きを止める　{v['value'][1] * 100}％　{v['value'][0] / 30 :.2f}秒", True, (0,0,0))
+            elif k == "slow":
+                ability_text = self.font1.render(f"遅くする　{v['value'][1] * 100}％　{v['value'][0] / 30 :.2f}秒", True, (0,0,0))
+            elif k == "back":
+                ability_text = self.font1.render(f"ふっとばす　{v['value'][1] * 100}％　{v['value'][0] / 30 :.2f}秒", True, (0,0,0))
+            else:
+                continue
+            ability_rect = pygame.Rect(self.width * 0.3 + 16, self.height * (0.26 + 0.07 * j), self.width * 0.5, self.height * 0.1)
+            self.abilities.append((meppo, ability_rect, ability_text, targets_img))
+            j += 1
+            
+        
+        # 説明
+        self.name_text = self.font1.render(f"{name}", True, (0,0,0))
+        self.name_rect = pygame.Rect(self.width * 0.3 + 16, self.height * 0.55, self.width * 0.5, self.height * 0.1)
+        self.description_text = self.font1.render(f"{description}", True, (0,0,0))
+        self.description_rect = pygame.Rect(self.width * 0.3 + 16, self.height * 0.6, self.width * 0.5, self.height * 0.1)
 
     def other_update(self):
         self.gold_text = self.font1.render(f"{self.game.coin} G", True, (0,0,0))
@@ -92,19 +131,19 @@ class Enhancement:
         other = self.game.data2
         self.castlehp_text = self.font1.render(f"城体力　　：{int(other['castle_hp'] * other['items']['castle_hp'])}", True, (0,0,0))
         self.castlehp_button = pygame.Rect(self.width * 0.83, 10 + self.height * 0.13, self.width * 0.14, self.height * 0.05)
-        self.castlehp_button_text = self.font1.render(f"強化　{cost['castle_hp']} G", True, (0,0,0))
+        self.castlehp_button_text = self.font1.render(f"強化　{cost['castle_hp'] * self.kaisu} G", True, (0,0,0))
 
         self.slot_text = self.font1.render(f"スロット　：{other['slot'] + other['items']['slot']}枠", True, (0,0,0))
         self.slot_button = pygame.Rect(self.width * 0.83, 10 + self.height * 0.25, self.width * 0.14, self.height * 0.05)
-        self.slot_button_text = self.font1.render(f"増加　{cost['slot']} G", True, (0,0,0))
+        self.slot_button_text = self.font1.render(f"増加　{cost['slot'] * self.kaisu} G", True, (0,0,0))
 
         self.maxspawn_text = self.font1.render(f"出撃制限　：{int(other['max_spawn'] * other['items']['max_spawn'])}体", True, (0,0,0))
         self.maxspawn_button = pygame.Rect(self.width * 0.83, 10 + self.height * 0.37, self.width * 0.14, self.height * 0.05)
-        self.maxspawn_button_text = self.font1.render(f"増加　{cost['max_spawn']} G", True, (0,0,0))
+        self.maxspawn_button_text = self.font1.render(f"増加　{cost['max_spawn'] * self.kaisu} G", True, (0,0,0))
 
         self.reward_text = self.font1.render(f"クリア報酬：{int(other['reward'] * other['items']['reward'])}", True, (0,0,0))
         self.reward_button = pygame.Rect(self.width * 0.83, 10 + self.height * 0.49, self.width * 0.14, self.height * 0.05)
-        self.reward_button_text = self.font1.render(f"増加　{cost['reward']} G", True, (0,0,0))
+        self.reward_button_text = self.font1.render(f"増加　{cost['reward'] * self.kaisu} G", True, (0,0,0))
 
         self.start_button = pygame.Rect(self.width * 0.82, 10 + self.height * 0.68, self.width * 0.16, self.height * 0.11)
         self.start_button_text = self.font2.render(f"開戦", True, (0,0,0))
@@ -156,6 +195,18 @@ class Enhancement:
         pygame.draw.rect(screen, (255,255,0), self.respawn_button) 
         screen.blit(self.respawn_button_text, (self.respawn_button.centerx - self.respawn_button_text.get_width() // 2, self.respawn_button.centery - self.respawn_button_text.get_height() // 2))
 
+        # 能力 params[8]
+        for i in self.abilities:
+            if i[0]:
+                screen.blit(i[2], i[1])
+                for j in i[3]:
+                    screen.blit(j[0], j[1])
+            else:
+                screen.blit(i[2], i[1])
+        # 説明
+        screen.blit(self.name_text, self.name_rect)
+        screen.blit(self.description_text, self.description_rect)
+
         # others
         screen.blit(self.gold_text, (self.width * 0.9, 8 + self.height * 0))
         pygame.draw.rect(screen, (255,130,130), self.others_rect)
@@ -202,10 +253,12 @@ class Enhancement:
             
             if self.kaisu_up_button.collidepoint(event.pos):
                 self.kaisu += 1
+                self.character_update()
                 self.other_update()
             if self.kaisu_down_button.collidepoint(event.pos):
                 if self.kaisu > 1:
                     self.kaisu -= 1
+                self.character_update()
                 self.other_update()
 
             for _ in range(self.kaisu):

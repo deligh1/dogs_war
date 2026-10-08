@@ -237,7 +237,7 @@ class Battle:
                     # print(i)
                     self.spawn_character(name=self.allies[i]["name"])
                     break
-            if self.lose_button.collidepoint(event.pos):
+            if self.battle.result == "ongoing" and self.lose_button.collidepoint(event.pos):
                 self.battle.result = "enemy_win"
             if self.bai_button.collidepoint(event.pos):
                 if self.game.bai != 2:

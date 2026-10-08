@@ -78,7 +78,8 @@ class Select:
                     self.selected_index = i
                     break
             if self.next_button.collidepoint(event.pos):
-                self.game.change_scene(self.selected_index)
+                if self.selected_index != -1:
+                    self.game.change_scene(self.selected_index)
         
 if __name__ == "__main__":
     pygame.init()

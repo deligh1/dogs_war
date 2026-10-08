@@ -18,10 +18,12 @@ class Opening:
         self.title_text_rect = self.title_text.get_rect()
         self.title_text_rect.center = (self.width // 2, self.height * 0.3)
 
-        self.start_button_normal = pygame.Rect(self.width * 0.35, self.height * 0.55, self.width * 0.3, self.height * 0.1)
+        self.start_button_normal = pygame.Rect(self.width * 0.35, self.height * 0.50, self.width * 0.3, self.height * 0.1)
         self.start_button_normal_text = self.font1.render("ふつう", True, (0,0,0))
-        self.start_button_hard = pygame.Rect(self.width * 0.35, self.height * 0.70, self.width * 0.3, self.height * 0.1)
+        self.start_button_hard = pygame.Rect(self.width * 0.35, self.height * 0.65, self.width * 0.3, self.height * 0.1)
         self.start_button_hard_text = self.font1.render("むずかしい", True, (0,0,0))
+        self.start_button_htp = pygame.Rect(self.width * 0.35, self.height * 0.80, self.width * 0.3, self.height * 0.1)
+        self.start_button_htp_text = self.font1.render("遊び方", True, (0,0,0))
 
     def step(self):
         pass
@@ -33,7 +35,8 @@ class Opening:
         screen.blit(self.start_button_normal_text, (self.start_button_normal.centerx - self.start_button_normal_text.get_width() // 2, self.start_button_normal.centery - self.start_button_normal_text.get_height() // 2))
         pygame.draw.rect(screen, (250,250,0), self.start_button_hard)
         screen.blit(self.start_button_hard_text, (self.start_button_hard.centerx - self.start_button_hard_text.get_width() // 2, self.start_button_hard.centery - self.start_button_hard_text.get_height() // 2))
-
+        pygame.draw.rect(screen, (250,250,0), self.start_button_htp)
+        screen.blit(self.start_button_htp_text, (self.start_button_htp.centerx - self.start_button_htp_text.get_width() // 2, self.start_button_htp.centery - self.start_button_htp_text.get_height() // 2))
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -41,6 +44,8 @@ class Opening:
                 self.game.change_scene("start_normal")
             if self.start_button_hard.collidepoint(event.pos):
                 self.game.change_scene("start_hard")
+            if self.start_button_htp.collidepoint(event.pos):
+                self.game.change_scene("start_htp")
 
 if __name__ == "__main__":
     import random

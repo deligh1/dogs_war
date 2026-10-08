@@ -1,0 +1,1 @@
+self.data2["allies"][item["value"][0]]["status"]["params"][8]
