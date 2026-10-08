@@ -128,7 +128,7 @@ class character:
             if "meppo" in self.ability:
                 for attribute in self.ability["meppo"]["value"]:
                     if attribute in character.attribute:
-                        damage *= 1.8
+                        damage *= 3
             if ("stop" in self.ability) and random.random() < self.ability["stop"]["value"][1]:
                 if "stop" not in character.invalid:
                     character.status["stop"] = self.ability["stop"]["value"][0]
@@ -144,7 +144,7 @@ class character:
             if "meppo" in character.ability:
                 for attribute in character.ability["meppo"]["value"]:
                     if attribute in self.attribute:
-                        damage //= 2.5
+                        damage //= 4
                 if ("invalid" in character.ability) and random.random() < character.ability["invalid"]["value"][1]:
                     damage = 0
             character.hp -= damage

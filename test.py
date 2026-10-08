@@ -23,8 +23,8 @@ if __name__ == "__main__":
     screen_size = (1200, 700)
     screen = pygame.display.set_mode(screen_size)
     clock = pygame.time.Clock()
-    ally_names = ["クマせんせー"]
-    enemy_names = ["ネーコ"]
+    ally_names = ["昇龍 沖而"]
+    enemy_names = ["猫神様"]
     characters = [
         # {"name": "ネーコ", "params": (False, 100,8,10,(140,-320,140),(8,10,30),False,3,[],0,0), "move_count": [2,14,[1,1,1,1,1,1,1,2,2,2,2,2,2,2]], "attack_count": [2,18,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]], "size": (320, 320)},
         # {"name": "わんーこ", "params": (True, 90,8,5,(110,-320,110),(8,8,40),False,3,[],0,0), "move_count": [3,16,[1,1,1,1,2,2,2,2,3,3,3,3,2,2,2,2]], "attack_count": [2,16,[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]], "size": (320, 320)},
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         allies.append({"name": name, "first_spawn": 30, "respawn_time": 300, "spawn_num": 1, "auto_spawn": True, "auto_respawn": True})
     enemies = []
     for name in enemy_names:
-        enemies.append({"name": name, "first_spawn": 30, "respawn_time": 30, "spawn_num": 100, "auto_spawn": True, "auto_respawn": True})
+        enemies.append({"name": name, "first_spawn": 30, "respawn_time": 60, "spawn_num": 100, "auto_spawn": True, "auto_respawn": True})
     distance = 4600
     battle = Battle(game, screen_size[0], screen_size[1], characters, castles, distance, "assets/images/back_grounds/back_ground1.png", allies, enemies, ally_max_spawn=100, enemy_max_spawn=100)
     running = True

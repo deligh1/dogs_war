@@ -25,6 +25,7 @@ class Game:
         self.font1 = pygame.font.Font(self.font_address, 30)
 
         self.bai = 1
+        pygame.mixer.init(frequency = 44100)
 
     def load(self):
         with open("data/data.json", "r", encoding="utf-8") as f:
@@ -65,6 +66,7 @@ class Game:
     def change_scene(self, key):
         # print(key)
         if key == "return":
+            pygame.mixer.music.stop()
             self.load()
             self.load2()
             self.scene = opening.Opening(self, self.width, self.height)
@@ -75,6 +77,8 @@ class Game:
                 items = self.shaffle_items()
                 self.scene = item_select.Select(self, self.width, self.height, items)
                 self.state = "item_select"
+                pygame.mixer.music.load("assets/sound/出陣.wav")     # 音楽ファイルの読み込み
+                pygame.mixer.music.play(-1)
             if key == "start_htp":
                 self.scene = htp.Htp(self, self.width, self.height)
         elif self.state == "item_select":
@@ -85,6 +89,8 @@ class Game:
             if key == "start":
                 self.scene = battle.Battle(self, self.width, self.height, *self.ready_battle())
                 self.state = "battle"
+                pygame.mixer.music.load("assets/sound/わんこ大戦争.wav") 
+                pygame.mixer.music.play(-1)
         elif self.state == "battle":
             self.bai = 1
             if key == "ally_win":
@@ -96,6 +102,10 @@ class Game:
                     items = self.shaffle_items()
                     self.scene = item_select.Select(self, self.width, self.height, items)
                     self.state = "item_select"
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("assets/sound/出陣.wav")     # 音楽ファイルの読み込み
+                    pygame.mixer.music.play(-1)
+
             if key == "enemy_win":
                 self.scene = result.Result(self, self.width, self.height)
                 self.state = "result"
