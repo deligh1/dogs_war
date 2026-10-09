@@ -194,7 +194,7 @@ class Game:
             raise ValueError("強化処理がありません")
         
         enemy = items["enemy"]
-        self.data2["enemies"][enemy["value"][0]] += enemy["value"][1]
+        self.data2["enemies"][enemy["value"][0]] *= enemy["value"][1]
     
     def ready_battle(self):
         # magnification注意
@@ -210,11 +210,11 @@ class Game:
             characters.append(chara)
         for i in range(len(stage["enemies"])):
             name = stage["enemies"][i]
-            chara = self.enemy_characters[name]
-            chara["params"][1] *= stage["level"][i] + self.data2["enemies"][name] + 4
-            chara["params"][1] //= 5
-            chara["params"][2] *= stage["level"][i] + self.data2["enemies"][name] + 4
-            chara["params"][2] //= 5
+            chara = copy.deepcopy(self.enemy_characters[name])
+            chara["params"][1] = int(stage["level"][i] * self.data2["enemies"][name] * chara["params"][1])
+            # chara["params"][1] //= 5
+            chara["params"][2] = int(stage["level"][i] * self.data2["enemies"][name] * chara["params"][2])
+            # chara["params"][2] //= 5
             characters.append(chara)
 
         castles = [{"hp":int(self.data2["castle_hp"] * self.data2["items"]["castle_hp"])},

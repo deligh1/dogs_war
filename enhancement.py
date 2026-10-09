@@ -124,7 +124,7 @@ class Enhancement:
     def other_update(self):
         self.gold_text = self.font1.render(f"{self.game.coin} G", True, (0,0,0))
 
-        self.others_rect = pygame.Rect(self.width * 0.8, 6 + self.height * 0.07, self.width * 0.2 - 8, self.height * 0.6)
+        self.others_rect = pygame.Rect(self.width * 0.8, 6 + self.height * 0.07, self.width * 0.2 - 8, self.height * 0.5)
 
         name = self.allies[self.selected]["name"]
         cost = self.game.data2["costs"]
@@ -145,7 +145,8 @@ class Enhancement:
         self.reward_button = pygame.Rect(self.width * 0.83, 10 + self.height * 0.49, self.width * 0.14, self.height * 0.05)
         self.reward_button_text = self.font1.render(f"増加　{cost['reward'] * self.kaisu} G", True, (0,0,0))
 
-        self.start_button = pygame.Rect(self.width * 0.82, 10 + self.height * 0.68, self.width * 0.16, self.height * 0.11)
+        self.start_button = pygame.Rect(self.width * 0.82, 10 + self.height * 0.58, self.width * 0.16, self.height * 0.21)
+        self.stage_button_text = self.font1.render(f"ステージ{self.game.stage+1}", True, (0,0,0))
         self.start_button_text = self.font2.render(f"開戦", True, (0,0,0))
 
         self.kaisu_up_button = pygame.Rect(self.width * 0.62, 10 + self.height * 0.72, self.width * 0.04, self.height * 0.06)
@@ -228,7 +229,8 @@ class Enhancement:
         screen.blit(self.reward_button_text, (self.reward_button.centerx - self.reward_button_text.get_width() // 2, self.reward_button.centery - self.reward_button_text.get_height() // 2))
 
         pygame.draw.rect(screen, (255,255,0), self.start_button) 
-        screen.blit(self.start_button_text, (self.start_button.centerx - self.start_button_text.get_width() // 2, self.start_button.centery - self.start_button_text.get_height() // 2))
+        screen.blit(self.stage_button_text, (self.start_button.centerx - self.stage_button_text.get_width() // 2, self.start_button.centery - self.stage_button_text.get_height() // 2 - self.width * 0.02))
+        screen.blit(self.start_button_text, (self.start_button.centerx - self.start_button_text.get_width() // 2, self.start_button.centery - self.start_button_text.get_height() // 2 + self.width * 0.02))
 
         pygame.draw.rect(screen, (255,255,0), self.kaisu_up_button) 
         screen.blit(self.kaisu_up_button_text, (self.kaisu_up_button.centerx - self.kaisu_up_button_text.get_width() // 2, self.kaisu_up_button.centery - self.kaisu_up_button_text.get_height() // 2))

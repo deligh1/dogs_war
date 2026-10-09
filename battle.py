@@ -48,7 +48,7 @@ class Battle:
         self.reward = reward
 
         self.font_address = "assets/fonts/Yuji_Syuku/YujiSyuku-Regular.ttf"
-        self.font1 = pygame.font.Font(self.font_address, 30)
+        self.font1 = pygame.font.Font(self.font_address, 36)
         self.font2 = pygame.font.Font(self.font_address, 80)
 
         self.character_buttons = [pygame.Rect(self.width * (100 - 10 * len(self.allies) + 1 + 20 * i) // 200, self.height - 95, self.width * 0.09, 90) for i in range(len(allies))]
@@ -132,9 +132,16 @@ class Battle:
         screen.blit(self.enemy_castle_img, enemy_castle_rect)
 
         ally_castle_hp_text = self.font1.render(f"{data['ally_castle_hp']}", True, (0, 0, 0))
+        ally_castle_hp_text2 = self.font1.render(f"{data['ally_castle_hp']}", True, (255,255,255))
         enemy_castle_hp_text = self.font1.render(f"{data['enemy_castle_hp']}", True, (0, 0, 0))
+        enemy_castle_hp_text2 = self.font1.render(f"{data['enemy_castle_hp']}", True, (255,255,255))
+        delta = 2
+        # screen.blit(ally_castle_hp_text, (ally_castle_rect.left + 170, ally_castle_rect.top + 40))
+        # screen.blit(ally_castle_hp_text2, (ally_castle_rect.left + 170 + delta, ally_castle_rect.top + 40 + delta))
+        screen.blit(ally_castle_hp_text2, (ally_castle_rect.left + 170 + delta, ally_castle_rect.top + 40 + delta))
         screen.blit(ally_castle_hp_text, (ally_castle_rect.left + 170, ally_castle_rect.top + 40))
-        screen.blit(enemy_castle_hp_text, (enemy_castle_rect.left - 30, enemy_castle_rect.top + 40))
+        screen.blit(enemy_castle_hp_text2, (enemy_castle_rect.left - 50 + delta, enemy_castle_rect.top + 40 + delta))
+        screen.blit(enemy_castle_hp_text, (enemy_castle_rect.left - 50, enemy_castle_rect.top + 40))
         # キャラクターの描画
         # print(len(data["characters"]))
         for c in data["characters"]:
